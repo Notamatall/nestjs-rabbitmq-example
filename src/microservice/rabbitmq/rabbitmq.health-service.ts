@@ -2,7 +2,7 @@
 // src/rabbitmq/rabbitmq.health.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { connect, Connection, Channel, ChannelModel } from 'amqplib';
-import { RABBITMQ_CONNECTION_OPTIONS } from './rabbit-mq.constants';
+import { RABBITMQ_CONNECTION_OPTIONS } from './rabbitmq.constants';
 
 @Injectable()
 export class RabbitMQHealthService {

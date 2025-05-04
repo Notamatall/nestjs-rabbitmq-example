@@ -1,12 +1,11 @@
 // src/rabbitmq/rabbitmq.module.ts
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { RabbitMQService } from './rabbit-mq.service';
-import { RabbitMQHealthService } from './rabbit-mq.health-service';
-import { MessageConsumer } from './rabbit-mq.consumer';
-import { RABBITMQ_CONNECTION_OPTIONS } from './rabbit-mq.constants';
-import { IsLocal } from 'src/utils';
-
+import { RabbitMQService } from './rabbitmq.service';
+import { RabbitMQHealthService } from './rabbitmq.health-service';
+import { RABBITMQ_CONNECTION_OPTIONS } from './rabbitmq.constants';
+import { QueueInspectionController } from './queue-inspection.controller';
+import { QueueInspectionService } from './rabbitmq.queue-inspection.service';
 @Module({
   imports: [
     ClientsModule.register([
@@ -21,8 +20,8 @@ import { IsLocal } from 'src/utils';
       },
     ]),
   ],
-  controllers: [MessageConsumer],
-  providers: [RabbitMQService, RabbitMQHealthService],
+  controllers: [QueueInspectionController],
+  providers: [RabbitMQService, RabbitMQHealthService, QueueInspectionService],
   exports: [RabbitMQService],
 })
 export class RabbitMQModule {}

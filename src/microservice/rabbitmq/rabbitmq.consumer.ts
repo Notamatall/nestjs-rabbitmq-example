@@ -64,43 +64,4 @@ export class MessageConsumer {
       channel.ack(originalMsg);
     }
   }
-
-  @EventPattern('batch_event')
-  handleBatchEvent(@Payload() data: any, @Ctx() context: RmqContext) {
-    const channel = context.getChannelRef();
-    const originalMsg = context.getMessage();
-
-    try {
-      this.logger.log(
-        `Received batch event #${data.index}: ${JSON.stringify(data)}`,
-      );
-
-      // Simulate processing time (varying based on the message index)
-      const processingTime = 100 + data.index * 50;
-
-      // Process the message (simulate async work)
-      setTimeout(() => {
-        try {
-          // Acknowledge the message after processing
-          channel.ack(originalMsg);
-          this.logger.log(
-            `Processed batch event #${data.index} in ${processingTime}ms`,
-          );
-        } catch (error) {
-          this.logger.error(
-            `Error acknowledging batch event #${data.index}: ${error.message}`,
-            error.stack,
-          );
-        }
-      }, processingTime);
-    } catch (error) {
-      this.logger.error(
-        `Error processing batch event #${data.index}: ${error.message}`,
-        error.stack,
-      );
-
-      // Acknowledge the message to prevent redelivery loops
-      channel.ack(originalMsg);
-    }
-  }
 }

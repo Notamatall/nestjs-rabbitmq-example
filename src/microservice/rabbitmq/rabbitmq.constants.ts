@@ -1,7 +1,12 @@
 // src/rabbitmq/rabbitmq.constants.ts
+
+import { env } from 'process';
+
+const rabbitMqUrl = env.FAST_TRACK_RABBITMQ_URL;
+const rabbitMqQueue = env.FAST_TRACK_RABBITMQ_QUEUE_NAME;
 export const RABBITMQ_CONNECTION_OPTIONS = {
-  urls: ['amqp://rabbitmq:rabbitmq@localhost:5672'],
-  queue: 'main_queue',
+  urls: [rabbitMqUrl],
+  queue: rabbitMqQueue,
   queueOptions: {
     durable: true,
     arguments: {

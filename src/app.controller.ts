@@ -1,5 +1,5 @@
 // src/app.controller.ts
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { environmentConfig } from './config/environment.config';
